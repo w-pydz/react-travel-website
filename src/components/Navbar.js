@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import { Button } from './Button';
 import './Navbar.css';
@@ -8,7 +8,7 @@ function Navbar() {
     const [button, setButton] = useState(true);
  
     const handleClick = () => setClick(!click);
-    const closeMobilMenu = () => setClick(false);
+    const closeMobileMenu = () => setClick(false);
 
     const showButton = () => {
         if(window.innerWidth <= 960)
@@ -19,7 +19,11 @@ function Navbar() {
         {
             setButton(true);
         }
-    }
+    };
+
+    useEffect(() => {
+        showButton()
+    }, []);
 
     window.addEventListener('resize', showButton);
 
@@ -27,7 +31,7 @@ function Navbar() {
         <>
             <nav className='navbar'>
                 <div className='navbar-container'>
-                    <Link to="/" className='navbar-logo'>
+                    <Link to="/" className='navbar-logo' onClick={closeMobileMenu}>
                         WONGNAI 
                     </Link>
                     <div className='menu-icon' onClick={handleClick}>
@@ -35,22 +39,22 @@ function Navbar() {
                     </div>
                     <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                         <li className='nav-item'>
-                            <Link to='/' className='nav-links' onClick={closeMobilMenu}>
+                            <Link to='/' className='nav-links' onClick={closeMobileMenu}>
                                 Home
                             </Link>
                         </li>
                         <li className='nav-item'>
-                            <Link to='/services' className='nav-links' onClick={closeMobilMenu}>
+                            <Link to='/services' className='nav-links' onClick={closeMobileMenu}>
                                 Services
                             </Link>
                         </li>
                         <li className='nav-item'>
-                            <Link to='/products' className='nav-links' onClick={closeMobilMenu}>
+                            <Link to='/products' className='nav-links' onClick={closeMobileMenu}>
                                 Products
                             </Link>
                         </li>
                         <li className='nav-item'>
-                            <Link to='/sign-up' className='nav-links-mobile' onClick={closeMobilMenu}>
+                            <Link to='/sign-up' className='nav-links-mobile' onClick={closeMobileMenu}>
                                 Sign Up
                             </Link>
                         </li>
